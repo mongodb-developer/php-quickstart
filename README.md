@@ -2,6 +2,10 @@
 
 This is  MongoDB PHP quick start. It was written in conjunction with this [article](https://developer.mongodb.com/quickstart/php-quickstart). 
 
+## Status as of February 24, 2021
+
+Under development... incomplete. Stay tuned.
+
 ## Prerequisites
 
    You'll need the following installed on your computer to follow along with this tutorial:
