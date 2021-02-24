@@ -11,4 +11,4 @@ This is  MongoDB PHP quick start. It was written in conjunction with this [artic
    -  [PECL](https://pecl.php.net/) - The repository for PHP Extensions.
    -  A code editor of your choice. I recommend [Visual Studio Code](https://code.visualstudio.com/).
 
-   This repo and the associated article are decidedly macOS focused. PHP is definitely supported across a number of platforms however, I am only currently focusing on macOS. Should there be great interest in expanding the platform coverage, I'll consider cover those.
+   This `repo <https://github.com/mongodb-developer/php-quickstart>`__ and the associated article are decidedly macOS focused. PHP is definitely supported across a number of platforms however, I am only currently focusing on macOS. Should there be great interest in expanding the platform coverage, I'll consider cover those.
