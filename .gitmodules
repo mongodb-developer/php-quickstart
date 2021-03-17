@@ -1,0 +1,3 @@
+[submodule "madlibs/buildfest2021"]
+	path = madlibs/buildfest2021
+	url = git@github.com:jmikola/buildfest2021.git
