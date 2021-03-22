@@ -8,7 +8,7 @@
          'mongodb+srv://'.$_ENV['MDB_USER'].':'.$_ENV['MDB_PASS'].'@'.$_ENV['ATLAS_CLUSTER_SRV'].'/sample_restaurants'
       );
      
-      $collection = ($client)->sample_restaurants->restaurants;
+      $collection = $client->selectCollection('sample_analytics', 'customers');
 
       $updateResult = $collection->updateOne(
          [ 'restaurant_id' => '40356151' ],

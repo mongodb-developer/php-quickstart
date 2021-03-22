@@ -19,16 +19,8 @@ if (!empty($_POST['first_name'])) {
 
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- jQuery library -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<title>MongoDB PHP Quickstart - Madlibs</title>
-
+   <title>MongoDB PHP Quickstart - Madlibs</title>
 </head>
-
 <body>
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">MongoDB PHP - Quickstart - Mad Libs</a>
@@ -39,79 +31,75 @@ if (!isset($_POST['submit']))
   // display the form
   ?>
 <div class="container">
-<form class="form-horizontal" method='POST' action="index.php">
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="first_name">First Name:</label>
-    <div class="col-sm-10">
+<form method='POST' action="index.php">
+  <p>
+    First Name:</br>
+    <br>
       <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name">
-    </div>
-    <label class="control-label col-sm-2" for="last_name">Last Name:</label>
-    <div class="col-sm-10">
+      <br>
+    Last Name:</br>
+    <br>
       <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name">
-    </div>
-    <label class="control-label col-sm-2" for="company">Company Name:</label>
-    <div class="col-sm-10">
+      <br>
+    Company Name:</br>
+    <br>
       <input type="text" class="form-control" id="company" name="company" placeholder="Enter Company Name">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="job_function"> Job Title:</label>
-    <div class="col-sm-10">
+    Job Title:</br>
+    <br>
       <input type="text" class="form-control" id="job_function" name="job_function" placeholder="Enter your job title">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="adjective">Adjective:</label>
-    <div class="col-sm-10">
+      <br>
+    Adjective:</br>
+    <br>
       <input type="text" class="form-control" id="adjective" name="adjective" placeholder="Enter an adjective">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="singular_noun">Singular Noun:</label>
-    <div class="col-sm-10">
+    Singular Noun:</br>
+    <br>
       <input type="text" class="form-control" id="singular_noun" name="singular_noun" placeholder="Enter a singular noun">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="plural_noun">Plural Noun:</label>
-    <div class="col-sm-10">
+    Plural Noun:</br>
+    <br>
       <input type="text" class="form-control" id="plural_noun" name="plural_noun" placeholder="Enter a plural noun">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="verb">Verb:</label>
-    <div class="col-sm-10">
+    Verb:</br>
+    <br>
       <input type="text" class="form-control" id="verb" name="verb" placeholder="Enter a verb">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="place">Place:</label>
-    <div class="col-sm-10">
+    Place:</br>
+    <br>
       <input type="text" class="form-control" id="place" name="place" placeholder="Enter the name of a place">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="food">Favorite Food:</label>
-    <div class="col-sm-10">
+    Favorite Food:</br>
+    <br>
       <input type="text" class="form-control" id="food" name="food" placeholder="Enter the name of your favorite food i.e. Pizza ">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="color">Favorite Color:</label>
-    <div class="col-sm-10">
+    Favorite Color:</br>
+    <br>
       <input type="text" class="form-control" id="color" name="color" placeholder="Enter the name of your favorite color i.e. red">
-    </div>
+    <p>
 
-    <label class="control-label col-sm-2" for="country">Country:</label>
-    <div class="col-sm-10">
+    Country:</br>
+    <br>
       <input type="text" class="form-control" id="country" name="country" placeholder="Enter the name of your country">
-    </div>
+      <br>
 
-    <label class="control-label col-sm-2" for="body_part">Body Part:</label>
-    <div class="col-sm-10">
+    Body Part:</br>
+    <br>
       <input type="text" class="form-control" id="body_part" name="body_part" placeholder="Enter the name of a body part">
-    </div>
+      <br>
 
-  </div>
-
-  <div class="form-group">
+      <br>
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" id="submit" name="submit" class="btn btn-default">Submit</button>
     </div>
-  </div>
+   </p>
 </form>
 </div>
 <?php

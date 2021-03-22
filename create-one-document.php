@@ -8,7 +8,7 @@
          'mongodb+srv://'.$_ENV['MDB_USER'].':'.$_ENV['MDB_PASS'].'@'.$_ENV['ATLAS_CLUSTER_SRV'].'/test'
       );
      
-      $collection = ($client)->test->users;
+      $collection = $client->selectCollection('sample_analytics', 'customers');
 
       $insertOneResult = $collection->insertOne([
          'username' => 'admin',
