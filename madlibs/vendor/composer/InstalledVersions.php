@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3c646db0a20f548e9236f9c504b68c304147d3b8',
+    'reference' => '3ee6a4e79a97d65657a21b4c9bf4e8ebae4f6d61',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3c646db0a20f548e9236f9c504b68c304147d3b8',
+      'reference' => '3ee6a4e79a97d65657a21b4c9bf4e8ebae4f6d61',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -121,6 +121,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
+    ),
+    'twig/twig' => 
+    array (
+      'pretty_version' => 'v3.3.0',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5',
     ),
     'vlucas/phpdotenv' => 
     array (

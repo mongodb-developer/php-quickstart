@@ -1,0 +1,8 @@
+{
+    "require": {
+        "mongodb/mongodb": "^1.8",
+        "vlucas/phpdotenv": "^5.3",
+        "twig/twig": "^3.3",
+        "doctrine/inflector": "^2.0"
+    }
+}

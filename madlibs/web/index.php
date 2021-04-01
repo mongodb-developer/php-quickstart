@@ -1,18 +1,56 @@
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$loader = new Twig\Loader\FilesystemLoader('views');
+$twig = new Twig\Environment($loader);
+
+$client = new MongoDB\Client(
+   'mongodb+srv://'.$_ENV['MDB_USER'].':'.$_ENV['MDB_PASS'].'@'.$_ENV['ATLAS_CLUSTER_SRV'].'/test'
+);
+
+use Doctrine\Inflector\InflectorFactory;
+$inflector = InflectorFactory::create()->build();
+
+
 if (!empty($_POST['first_name'])) {
    $first_name = $_POST["first_name"];
    $last_name = $_POST["last_name"];
    $color = $_POST['color'];
-   $food = $_POST['food'];
+   $email = $_POST['email'];
    $company = $_POST['company'];
    $adjective = $_POST['adjective'];
    $place = $_POST['place'];
    $verb = $_POST['verb'];
-   $plural_noun = $_POST['plural_noun'];
+   $food = $_POST['food'];
    $singular_noun = $_POST['singular_noun'];
    $job_function = $_POST['job_function'];
-   $body_part = $_POST['body_part'];
-   $country = $_POST['country'];
+
+   $collection = $client->selectCollection('madlibs', 'responses');
+   $plural_noun =  $inflector->pluralize($_POST['singular_noun']); 
+
+   $insertOneResult = $collection->insertOne([
+      'first_name' => $first_name,
+      'last_name' => $last_name,
+      'color' => $color,
+      'email' => $email,
+      'company' => $company,
+      'adjective' => $adjective,
+      'food' => $food,
+      'place' => $place,
+      'verb' => $verb,
+      'plural_noun' => $plural_noun,
+      'singular_noun' => $singular_noun,
+      'job_function' => $job_function,
+   ]);
+
+   printf("Inserted %d document(s)\n", $insertOneResult->getInsertedCount());
+
+   var_dump($insertOneResult->getInsertedId());
+
 }
 
 ?>
@@ -33,6 +71,14 @@ if (!empty($_POST['first_name'])) {
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">MongoDB PHP - Quickstart - Mad Libs</a>
 </nav>
+<div class="container text-center">
+<img src="images/madlibs.png" 
+             class="img-responsive" alt="mad libs" 
+             width="500" height="178" />        <h1>MongoDB PHP Quickstart - Mad Libs </h1>
+        <br>  
+            Fill in the blanks, and let's create a story!
+        </p>
+    </div>
 <?php
 if (!isset($_POST['submit']))
 {
@@ -49,6 +95,10 @@ if (!isset($_POST['submit']))
     <div class="col-sm-10">
       <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name">
     </div>
+    <label class="control-label col-sm-2" for="email">Email Address:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Address">
+    </div>
     <label class="control-label col-sm-2" for="company">Company Name:</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="company" name="company" placeholder="Enter Company Name">
@@ -56,7 +106,22 @@ if (!isset($_POST['submit']))
 
     <label class="control-label col-sm-2" for="job_function"> Job Title:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="job_function" name="job_function" placeholder="Enter your job title">
+      <select name="job_function" class="custom-select">
+         <option value="IT executive">IT executive</option>
+         <option value="Business Executive">Business Executive</option>
+         <option value="Architect">Architect</option> 
+         <option value="Business Developer/Alliance Manager">Business Developer/Alliance Manager</option> 
+         <option value="DBA">DBA</option>
+         <option value="Technical Operations">Technical Operations</option>
+         <option value="Director/Development Manager">Director/Development Manager</option>
+         <option value="Product/Project Manager">Product/Project Manager</option>
+         <option value="Software Developer/Engineer">Software Developer/Engineer</option>
+         <option value="Mobile Engineer">Mobile Engineer</option> 
+         <option value="Business Analyst">Business Analyst</option> 
+         <option value="Data Scientist">Data Scientist</option> 
+         <option value="Student">Student</option> 
+         <option value="Other">Other</option>
+      </select>
     </div>
   </div>
   <div class="form-group">
@@ -67,43 +132,29 @@ if (!isset($_POST['submit']))
 
     <label class="control-label col-sm-2" for="singular_noun">Singular Noun:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="singular_noun" name="singular_noun" placeholder="Enter a singular noun">
-    </div>
-
-    <label class="control-label col-sm-2" for="plural_noun">Plural Noun:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="plural_noun" name="plural_noun" placeholder="Enter a plural noun">
-    </div>
-
-    <label class="control-label col-sm-2" for="verb">Verb:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="verb" name="verb" placeholder="Enter a verb">
-    </div>
-
-    <label class="control-label col-sm-2" for="place">Place:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="place" name="place" placeholder="Enter the name of a place">
+      <input type="text" class="form-control" id="singular_noun" name="singular_noun" placeholder="Enter a singular noun e.g. Hammer">
     </div>
 
     <label class="control-label col-sm-2" for="food">Favorite Food:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="food" name="food" placeholder="Enter the name of your favorite food i.e. Pizza ">
+      <input type="text" class="form-control" id="food" name="food" placeholder="Enter your favorite food e.g. Pizza">
+    </div>
+
+    <label class="control-label col-sm-2" for="verb">Verb:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="verb" name="verb" placeholder="Enter a verb e.g. Run">
+    </div>
+
+    <label class="control-label col-sm-2" for="place">Place:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="place" name="place" placeholder="Enter the name of a place e.g. Pittsburgh">
     </div>
 
     <label class="control-label col-sm-2" for="color">Favorite Color:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="color" name="color" placeholder="Enter the name of your favorite color i.e. red">
+      <input type="text" class="form-control" id="color" name="color" placeholder="Enter the name of your favorite color e.g. red">
     </div>
 
-    <label class="control-label col-sm-2" for="country">Country:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="country" name="country" placeholder="Enter the name of your country">
-    </div>
-
-    <label class="control-label col-sm-2" for="body_part">Body Part:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="body_part" name="body_part" placeholder="Enter the name of a body part">
-    </div>
 
   </div>
 
@@ -118,35 +169,34 @@ if (!isset($_POST['submit']))
 }
 else
 {
-   ?>
-  // display the output
-  World renowned <b><?php echo $job_function?></b>, <b><?php echo $first_name." ".$last_name?></b>, had been stranded on this planet for far too long. 
+?>
+<div class="container">
+   <h2>Thanks for Playing - here's your story</h2>
+   
+<?php
+   echo $twig->render('story.html', array(
+      'first_name' => $first_name,
+      'last_name' => $last_name,
+      'color' => $color,
+      'email' => $email,
+      'company' => $company,
+      'adjective' => $adjective,
+      'verb' => $verb,
+      'plural_noun' => $plural_noun,
+      'food' => $food,
+      'singular_noun' => $singular_noun,
+      'job_function' => $job_function
 
-  Sick of the taste of <b><?php echo $food?></b>, which was the only thing left to eat on this planet, <b><?php echo $first_name?></b> set out for higher ground. 
-  
-  If the <b><?php echo $color?></b> <b><?php echo $plural_noun?></b> were going to be stopped, <b><?php echo $first_name?></b> knew they were the only one that could stop them. 
-  
-  After all, that's why <b><?php echo $company?></b> hired <b><?php echo $first_name?></b> in the first place.
-  
-  Just as <b><?php echo $first_name?></b> got to the top of <b><?php echo $place?></b>, <b><?php echo $first_name?></b> saw that it was flooded with <b><?php echo $color?></b> <b><?php echo $plural_noun?></b>. 
-  
-  They immediately swarmed <b><?php echo $first_name?></b>, attacking on first sight. 
-  
-  Just like that <b><?php echo $first_name?></b>'s <b><?php echo $body_part?></b> was paralyzed. Things were taking a dire turn.
-  
-  It was then <b><?php echo $first_name?></b> remembered the secret weapon <b><?php echo $company?></b> had given <b><?php echo $first_name?></b> - <b><?php echo $adjective?></b>. 
-  
-  <b><?php echo $first_name?></b> took a <b><?php echo $adjective?></b> <b><?php echo $singular_noun?></b> and <b><?php echo $verb?></b>. 
-  
-  It didn't take long for the <b><?php echo $color?></b> <b><?php echo $plural_noun?></b> to know they were going to lose this battle. 
-  
-  Trying to safe face, they quickly retreated down the side of <b><?php echo $place?></b>, leaving <b><?php echo $first_name?></b> to enjoy the sweet taste of victory. 
-  
-  Although it cost a slight injury, the battle had been won. But the question still lingered - who would win the war?
-  
-  All <b><?php echo $first_name?></b> knew was that <b><?php echo $company?></b> would be thankful, heck even <b><?php echo $country?></b> would be thankful. 
-  
-  Every small win counted during times like these. 
+   ));
+?>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+</p>
+    <a class="btn btn-large btn-success" id="fire" href=".">Play Again</a>
+    </div>
+  </div>
+
+  </div>
  <?php 
 }
 ?>

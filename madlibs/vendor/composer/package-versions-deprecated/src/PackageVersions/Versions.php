@@ -41,8 +41,9 @@ final class Versions
   'symfony/polyfill-ctype' => 'v1.22.1@c6c942b1ac76c82448322025e084cadc56048b4e',
   'symfony/polyfill-mbstring' => 'v1.22.1@5232de97ee3b75b0360528dae24e73db49566ab1',
   'symfony/polyfill-php80' => 'v1.22.1@dc3063ba22c2a1fd2f45ed856374d79114998f91',
+  'twig/twig' => 'v3.3.0@1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5',
   'vlucas/phpdotenv' => 'v5.3.0@b3eac5c7ac896e52deab4a99068e3f4ab12d9e56',
-  '__root__' => 'dev-main@3c646db0a20f548e9236f9c504b68c304147d3b8',
+  '__root__' => 'dev-main@3ee6a4e79a97d65657a21b4c9bf4e8ebae4f6d61',
 );
 
     private function __construct()
