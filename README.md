@@ -1,6 +1,6 @@
 # Getting Started with MongoDB and PHP
 
-This is  MongoDB PHP quick start. It was written in conjunction with this [article](https://developer.mongodb.com/quickstart/php-quickstart). 
+This is  MongoDB PHP quick start. It was written in conjunction with this [article]([https://developer.mongodb.com/quickstart/php-quickstart](https://www.mongodb.com/developer/languages/php/php-setup/)). 
 
 ## Status as of February 24, 2021
 
